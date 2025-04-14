@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import https from 'https';
 
 export async function POST(request) {
   try {
@@ -13,13 +14,22 @@ export async function POST(request) {
       );
     }
 
+    // API URL'sini ortam değişkeninden al, yoksa varsayılan değeri kullan
+    const apiBaseUrl = process.env.API_BASE_URL || 'https://localhost:7253';
+
+    // SSL doğrulamasını devre dışı bırakan HTTP aracısı
+    const httpsAgent = new https.Agent({
+      rejectUnauthorized: false
+    });
+
     // API'ye istek gönder
-    const response = await fetch('https://localhost:7253/api/auth/login', {
+    const response = await fetch(`${apiBaseUrl}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userName, password }),
+      agent: httpsAgent // SSL doğrulamasını atla
     });
 
     // API'den gelen yanıtı al
