@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { setTokenCookie } from '@/lib/auth';
 
 export default function Login() {
   const [userName, setUserName] = useState('');
@@ -30,6 +31,11 @@ export default function Login() {
       
       if (!response.ok) {
         throw new Error(data.message || 'Giriş başarısız');
+      }
+
+      // Token'ı cookie'ye kaydet
+      if (data.token) {
+        setTokenCookie(data.token);
       }
 
       // Başarılı giriş, ana sayfaya yönlendir
