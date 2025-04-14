@@ -51,7 +51,6 @@ export const isAuthenticated = () => {
   }
 };
 
-// Token'dan kullanıcı bilgilerini al
 export const getUserInfo = () => {
   const token = getTokenFromCookie();
   if (!token) return null;
