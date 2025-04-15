@@ -109,12 +109,26 @@ export default function Home() {
 
             <div className="mt-10">
               {user ? (
-                <Link 
-                  href="/ideas" 
-                  className="px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-lg font-medium hover:from-pink-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl text-lg"
-                >
-                  Fikirlere Göz At
-                </Link>
+                <div className="flex gap-4">
+                  <Link 
+                    href="/ideas" 
+                    className="px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-lg font-medium hover:from-pink-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-xl text-lg"
+                  >
+                    Fikirlere Göz At
+                  </Link>
+                  
+                  {user.role !== 'Admin' && (
+                    <Link 
+                      href="/my-votes" 
+                      className="px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg font-medium hover:from-purple-600 hover:to-indigo-600 transition-all shadow-lg hover:shadow-xl text-lg flex items-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                      </svg>
+                      Oylarım
+                    </Link>
+                  )}
+                </div>
               ) : (
                 <Link 
                   href="/login" 
